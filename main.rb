@@ -5,13 +5,10 @@ project_path = ENV["AC_XCODEPROJ_PATH"] || ""
 repository_path = ENV["AC_REPOSITORY_DIR"]
 
 cocoapods_version = (ENV["AC_COCOAPODS_VERSION"] != nil && ENV["AC_COCOAPODS_VERSION"] !="") ? ENV["AC_COCOAPODS_VERSION"] : nil
+project_dir_path = repository_path ? (Pathname.new repository_path).join(File.dirname(project_path)) : File.dirname(project_path)
+cocoapods_podfile_path = File.join(project_dir_path,"Podfile")
+cocoapods_podfilelock_path = File.join(project_dir_path,"Podfile.lock")
 
-project_dir_path = ""
-if repository_path
-    unless project_path.to_s.strip.empty?
-        project_dir_path = (Pathname.new repository_path).join(File.dirname(project_path)) : File.dirname(project_path)
-    end
-end
 
 unless File.exist?(cocoapods_podfile_path)
     puts "Podfile does not exists."
