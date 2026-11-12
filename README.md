@@ -12,3 +12,13 @@ Optional Input Variables
 **Example values:** ./abc.xcodeproj
 - `$AC_REPOSITORY_DIR`: Specifies the cloned repository directory.
 - `$AC_COCOAPODS_VERSION`: Specifies cocoapods version.
+
+## Running tests
+
+Requires the [RSpec](https://rspec.info) gem and the Ruby standard library (Coverage). No Gemfile or Bundler needed.
+
+```bash
+ruby test/test_main.rb
+```
+
+A coverage report is printed at the end of each run. The tests never run the real `pod`, `gem` or `sudo`: stub executables are put first on `PATH` inside a temporary directory.
