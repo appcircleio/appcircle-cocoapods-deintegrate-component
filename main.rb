@@ -1,6 +1,8 @@
 require 'open3'
 require 'pathname'
 
+if __FILE__ == $PROGRAM_NAME
+
 project_path = ENV["AC_XCODEPROJ_PATH"] || ""
 repository_path = ENV["AC_REPOSITORY_DIR"]
 
@@ -20,12 +22,16 @@ if !project_path.to_s.strip.empty? && File.extname(project_path) != ".xcodeproj"
     exit 0
 end
 
+end # if __FILE__ == $PROGRAM_NAME
+
 def runCommand(command)
     puts "@@[command] #{command}"
     unless system(command)
       exit $?.exitstatus
     end
 end
+
+if __FILE__ == $PROGRAM_NAME
 
 if cocoapods_version.nil?
   if File.exist?(cocoapods_podfilelock_path)
@@ -63,3 +69,5 @@ Dir.chdir(project_dir_path) do
 end
 
 exit 0
+
+end # if __FILE__ == $PROGRAM_NAME
